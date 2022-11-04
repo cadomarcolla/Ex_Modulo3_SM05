@@ -9,8 +9,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
 import java.util.List;
 
 @Service
@@ -31,16 +32,14 @@ public class CadastroUsuarioService implements UserDetailsService {
     }
 
 
-    @Transactional//(readOnly = true)
+    @Transactional(readOnly = true)
     public Usuario getUserById(Long idUsuario){
         Usuario usuario = usuarioRepository.findById(idUsuario).get();
         usuario.getTelefones().size();
         return usuario;
     }
 
-
-
-    @Transactional//(readOnly = true)
+    @Transactional(readOnly = true)
     public List<Usuario> getUserByName(String nome){
 
         List<Usuario> usuarios = usuarioRepository.getUserByName(nome);
@@ -53,7 +52,7 @@ public class CadastroUsuarioService implements UserDetailsService {
     }
 
 
-    @Transactional//(readOnly = true)
+    @Transactional(readOnly = true)
     public List<Usuario> getUsers(){
 
         List<Usuario> usuarios = usuarioRepository.findAll();
